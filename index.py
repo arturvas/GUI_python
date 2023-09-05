@@ -2,7 +2,6 @@ import requests
 from tkinter import *
 
 
-
 def pegar_cotacoes():
     requisicao = requests.get('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-USD')
 
@@ -17,13 +16,24 @@ def pegar_cotacoes():
     Euro: {cotacao_euro}
     BTC: {cotacao_btc}'''
 
-    print(texto)
+    texto_cotacoes["text"] = texto
 
-pegar_cotacoes()
 
 
 janela = Tk()
 janela.title("Cotação Atual das Moedas")
+janela.geometry()
+
+# texto dentro da janela, e dentro coloca qual janela pertence o texto
+texto_orientacao = Label(janela, text='Clique no botão para ver as cotações das moedas')
+# agora dizemos onde ficara o texto
+texto_orientacao.grid(column=0, row=0, padx=10, pady=10)
+
+botao = Button(janela, text='Cotações [USD/EUR/BTC]', command=pegar_cotacoes) # obs.: nao passar o comando com a funcao com parentes
+botao.grid(column=0, row=1, padx=10, pady=10)
+
+texto_cotacoes = Label(janela, text='')
+texto_cotacoes.grid(column=0, row=2, padx=10, pady=10)
 
 
 janela.mainloop()
